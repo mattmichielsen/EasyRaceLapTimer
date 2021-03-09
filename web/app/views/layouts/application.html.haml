@@ -2,7 +2,7 @@
 %html{lang: "en"}
   %head
     %title
-      EasyRaceLapTimer
+      Zeel's Legs of Steel
 
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
@@ -20,7 +20,7 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand{:href => "/"}
-            EasyRaceLapTimer
+            Zeel's Legs of Steel
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
             - if current_user && (current_user.has_role?(:admin) || current_user.has_role?(:race_director))

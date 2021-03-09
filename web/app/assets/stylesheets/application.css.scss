@@ -17,7 +17,7 @@ body {
 
 body > .container-fluid{
   padding-top: 75px;
-  background: #FFF;
+  background: #fff;
 }
 a, a:link, a:visited{
   font-family: 'Oswald', sans-serif;
@@ -48,7 +48,7 @@ a:hover, a:focus{
   letter-spacing: .025em;
 }
 .navbar-default {
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
     -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0, .4);
     box-shadow:  0 0 3px 0 rgba(0,0,0, .4);
@@ -63,7 +63,7 @@ a:hover, a:focus{
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
   background: $primary;
-  color: #fff;
+  color: #ffd700;
 }
 .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
   max-height: 90vh;
@@ -95,7 +95,7 @@ a:hover, a:focus{
     background: $primary;
 
     .icon-bar{
-	  background: #FFF;
+	  background: #fff;
 	}
 }
 .dropdownmenu{
@@ -121,18 +121,18 @@ a:hover, a:focus{
   box-shadow: none;
   font-size: 1.1em;
   font-family: 'Oswald', sans-serif;
-  color: #FFF;
+  color: #fff;
 }
 a.btn{
-  color: #FFF;
+  color: #fff;
 }
 .btn-default{
   background: $grey3;
-  color: #FFF;
+  color: #fff;
 }
 .btn-primary{
   background: $grey1;
-  color: #FFF;
+  color: #fff;
 }
 .btn-primary:hover, .btn-primary:focus{
 	 background: $primary;
@@ -222,7 +222,7 @@ footer {
 
     a, a:link, a:visited {
   		background: $primary;
-  		color: #FFF;
+  		color: #fff;
   		font-size: 1.3em;
   		padding: 0.8em 1.3em;
 	}
