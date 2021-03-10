@@ -36,7 +36,7 @@ class Api::V1::LapTrackController < Api::V1Controller
 
     begin
       race_session_adapter = RaceSessionAdapter.new(@race_session)
-      pilot_race_lap = race_session_adapter.track_lap_time(params[:transponder_token],params[:lap_time_in_ms])
+      pilot_race_lap = race_session_adapter.track_lap_time(params[:transponder_token],params[:lap_time_in_ms],true)
     rescue Exception => ex
       #render status: 403, text: "#{ex.message}\n#{ex.backtrace.join("\n")}"
       puts ex.message
