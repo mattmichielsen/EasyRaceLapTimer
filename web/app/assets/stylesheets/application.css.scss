@@ -33,14 +33,19 @@ a:hover, a:focus{
   font-family: 'Oswald', sans-serif;
 }
 
+
 .navbar-brand{
-  text-indent: -2000px;
+  text-indent: 0px;
   width:280px;
   height: 60px;
   display: block;
   margin-left: -15px;
   padding: 10px;
-  background: $primary asset-url("erltlogo.png") no-repeat right center;
+  background: white asset-url("BOBHeeli.png") no-repeat left center;
+  background-size: 60px 60px;
+  padding-left: 65px;
+  padding-top: 18px;
+  text-align: center;
 }
 .navbar-default .navbar-brand{
   color: $primary;

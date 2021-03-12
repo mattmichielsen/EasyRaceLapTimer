@@ -1,4 +1,4 @@
-class CustomsoundfileWork
+class CustomSoundFileWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
