@@ -3,8 +3,6 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   get 'principal/index'
 
-  get 'welcome/index'
-
   devise_for :users
   mount Sidekiq::Web => '/sidekiq'
 
@@ -76,7 +74,7 @@ Rails.application.routes.draw do
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
 
-  root 'welcome#index'
+  root 'monitor#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
