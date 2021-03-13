@@ -243,3 +243,36 @@ footer {
   color:red;
   text-decoration:line-through;
 }
+
+
+//Begin Custom Principal styles
+
+.row {
+  width: 100%;
+}
+
+#one {
+  position:absolute;
+  left: 1%;
+  
+}
+
+#two {
+  
+  position:absolute;
+  left: 26%;
+}
+
+#three {
+  position:absolute;
+  left: 51%;
+}
+
+#four {
+  position:absolute;
+  left: 76%;
+}
+.column {
+  border: solid 3px blue;
+  width: 23%;
+}

@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'principal/index'
+
   get 'welcome/index'
 
   devise_for :users
