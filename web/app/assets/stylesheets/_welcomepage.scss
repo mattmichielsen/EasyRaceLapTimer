@@ -6,9 +6,10 @@
 .div-boxes {
     border: solid 5px red;
     border-radius: 15px;
-    width: 76%;
+    width: 95%;
     margin-bottom: 10px;
     padding-left: 5px;
+    z-index: 25;
 }
 
 #team85-logo {
@@ -19,8 +20,10 @@
     position: fixed;
     right: 0%;
     top: 60px;
-    width: 24%;
-    border: solid 5px pink;
+    width: 10%;
+    box-shadow: -1px 1px 7px rgb(209, 209, 209);
     height: 300px;
+    z-index: 1;
+    background-color: white;
 }
 
