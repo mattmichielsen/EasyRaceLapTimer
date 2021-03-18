@@ -252,13 +252,13 @@ footer {
   width: 100%;
 }
 
-#one {
+.one {
   position:absolute;
   left: 1%;
   
 }
 
-#two {
+.two {
   
   position:absolute;
   left: 26%;
@@ -274,7 +274,10 @@ footer {
   left: 76%;
 }
 .column {
-  border: solid 3px blue;
+  border-radius: 8px;
+  border: solid 2px gray;
   width: 23%;
+  box-shadow: 1px 1px 7px black;
 }
+
 
