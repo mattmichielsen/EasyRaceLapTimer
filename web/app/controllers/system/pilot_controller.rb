@@ -54,4 +54,9 @@ class System::PilotController < SystemController
     end
   end
 
+  def import
+    Pilot.import(params[:file])
+    redirect_to action: 'index', notice: "Successfully Imported Data!"
+  end
+
 end
