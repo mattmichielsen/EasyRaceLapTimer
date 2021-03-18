@@ -11,4 +11,16 @@ class Pilot < ActiveRecord::Base
   def total_laps
     self.pilot_race_laps.count
   end
+
+  def self.to_csv
+    attributes = %w{transponder_token name team}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |p|
+        csv << attributes.map{ |attr| p.send(attr) }
+      end
+    end
+  end
 end

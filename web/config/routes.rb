@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/system/pilot/edit/:id' => 'system/pilot#edit'
   patch '/system/pilot/update/:id' => 'system/pilot#update'
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
+  get '/system/pilot/export' => 'system/pilot#export', defaults: { format: :csv }
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
