@@ -2,10 +2,10 @@
 %html{lang: "en"}
   %head
     %title
-      EasyRaceLapTimer
+      Zeel's Legs of Steel
 
     = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+
     = csrf_meta_tags
     %meta{name:"viewport", content:"width=device-width", "initial-scale"=>1}
     = render file: '/shared/_favicon'
@@ -20,33 +20,34 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand{:href => "/"}
-            EasyRaceLapTimer
+            Zeel's Legs of Steel
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
-            - if current_user && (current_user.has_role?(:admin) || current_user.has_role?(:race_director))
-              %li
-                =link_to('Race Director',{action: 'index',controller: '/race_director'})
-            - if current_user && current_user.has_role?(:admin)
-              %li.dropdown
-                %a{href:"#", class:"dropdown-toggle", "data-toggle"=>"dropdown", role:"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
-                  Configuration
-                  %span.caret
-                %ul.dropdown-menu
-                  %li
-                    =link_to('System',{action: 'index',controller: '/system'})
-                  %li
-                    =link_to('Users',{action: 'index',controller: '/system/user'})
-                  %li
-                    =link_to('Pilots',{action: 'index',controller: '/system/pilot'})
-                  %li
-                    =link_to('Soundeffects',{action: 'index',controller: '/system/soundfile'})
-            %li
-              =link_to('Monitor',{action: 'index',controller: '/monitor'})
-            %li
-              =link_to('Pilots',{action: 'index',controller: '/pilots'})
-            %li
-              =link_to('History',{action: 'index',controller: '/history'})
             - if current_user
+              - if current_user && (current_user.has_role?(:admin) || current_user.has_role?(:race_director))
+                %li
+                  =link_to('Race Director',{action: 'index',controller: '/race_director'})
+              - if current_user && current_user.has_role?(:admin)
+                %li.dropdown
+                  %a{href:"#", class:"dropdown-toggle", "data-toggle"=>"dropdown", role:"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
+                    Configuration
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li
+                      =link_to('System',{action: 'index',controller: '/system'})
+                    %li
+                      =link_to('Users',{action: 'index',controller: '/system/user'})
+                    %li
+                      =link_to('Pilots',{action: 'index',controller: '/system/pilot'})
+                    %li
+                      =link_to('Soundeffects',{action: 'index',controller: '/system/soundfile'})
+              %li
+                =link_to('Monitor',{action: 'index',controller: '/monitor'})
+              %li
+                =link_to('Pilots',{action: 'index',controller: '/pilots'})
+              %li
+                =link_to('History',{action: 'index',controller: '/history'})
+            
               %li
                 = link_to(main_app.destroy_user_session_path, {:method => :delete}) do
                   Log Out
@@ -55,9 +56,7 @@
                 = link_to(main_app.new_user_session_path) do
                   Login
             %li
-              %a{href:"#"}
-                Version
-                = ERLT_VERSION
+             
         / /.nav-collapse
     .container-fluid
       .row

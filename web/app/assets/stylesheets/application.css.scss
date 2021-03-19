@@ -9,6 +9,7 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
 @import "_colors";
 
+@import "_welcomepage";
 
 body {
   padding: 0;
@@ -17,7 +18,7 @@ body {
 
 body > .container-fluid{
   padding-top: 75px;
-  background: #FFF;
+  background: #fff;
 }
 a, a:link, a:visited{
   font-family: 'Oswald', sans-serif;
@@ -33,14 +34,19 @@ a:hover, a:focus{
   font-family: 'Oswald', sans-serif;
 }
 
+
 .navbar-brand{
-  text-indent: -2000px;
+  text-indent: 0px;
   width:280px;
   height: 60px;
   display: block;
   margin-left: -15px;
   padding: 10px;
-  background: $primary asset-url("erltlogo.png") no-repeat right center;
+  background: white asset-url("BOBHeeli.png") no-repeat left center;
+  background-size: 60px 60px;
+  padding-left: 65px;
+  padding-top: 18px;
+  text-align: center;
 }
 .navbar-default .navbar-brand{
   color: $primary;
@@ -48,7 +54,7 @@ a:hover, a:focus{
   letter-spacing: .025em;
 }
 .navbar-default {
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
     -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0, .4);
     box-shadow:  0 0 3px 0 rgba(0,0,0, .4);
@@ -63,7 +69,7 @@ a:hover, a:focus{
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
   background: $primary;
-  color: #fff;
+  color: #ffd700;
 }
 .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
   max-height: 90vh;
@@ -95,7 +101,7 @@ a:hover, a:focus{
     background: $primary;
 
     .icon-bar{
-	  background: #FFF;
+	  background: #fff;
 	}
 }
 .dropdownmenu{
@@ -121,18 +127,18 @@ a:hover, a:focus{
   box-shadow: none;
   font-size: 1.1em;
   font-family: 'Oswald', sans-serif;
-  color: #FFF;
+  color: #fff;
 }
 a.btn{
-  color: #FFF;
+  color: #fff;
 }
 .btn-default{
   background: $grey3;
-  color: #FFF;
+  color: #fff;
 }
 .btn-primary{
   background: $grey1;
-  color: #FFF;
+  color: #fff;
 }
 .btn-primary:hover, .btn-primary:focus{
 	 background: $primary;
@@ -222,7 +228,7 @@ footer {
 
     a, a:link, a:visited {
   		background: $primary;
-  		color: #FFF;
+  		color: #fff;
   		font-size: 1.3em;
   		padding: 0.8em 1.3em;
 	}
@@ -238,3 +244,40 @@ footer {
   color:red;
   text-decoration:line-through;
 }
+
+
+//Begin Custom Principal styles
+
+.row {
+  width: 100%;
+}
+
+.one {
+  position:absolute;
+  left: 1%;
+  
+}
+
+.two {
+  
+  position:absolute;
+  left: 26%;
+}
+
+#three {
+  position:absolute;
+  left: 51%;
+}
+
+#four {
+  position:absolute;
+  left: 76%;
+}
+.column {
+  border-radius: 8px;
+  border: solid 2px gray;
+  width: 23%;
+  box-shadow: 1px 1px 7px black;
+}
+
+

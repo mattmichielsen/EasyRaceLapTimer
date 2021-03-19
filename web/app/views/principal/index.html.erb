@@ -1,0 +1,65 @@
+<style>
+body {
+  margin: 40px;
+  margin-top: 0px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 24% 24% 24% 24%;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  background-color: #444;
+  color: yellow;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
+a:link{
+    color: yellow;
+}
+a:visited{
+    color: yellow;
+}
+</style>
+<h1>Principal</h1>
+    <div id = "wrapper" class="wrapper">
+
+    </div>
+
+
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<script>
+ 
+
+var classTiles = function(x,y) {
+    for (j = 0; j < x.length; j++) { 
+        var tempValue = "box";
+        var team = document.createElement("h1");
+        team.setAttribute("class", tempValue);
+        var linkTag = document.createElement("a");
+        var linkText = document.createTextNode(x[j]);
+        linkTag.appendChild(linkText);
+        linkTag.title = x[j];
+        linkTag.href = y;
+        team.appendChild(linkTag);
+        document.getElementById("wrapper").append(team);
+
+
+
+    }
+}
+var y = "https://www.htmldog.com/guides/javascript/advanced/creatingelements/"; 
+var x = ["Hello", "Success","How Long Can THis Get?","One More", "Does it break it?", "cool", "legendary", "let's do it!", "last one", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+classTiles(x,y);
+
+</script>

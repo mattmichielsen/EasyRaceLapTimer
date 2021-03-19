@@ -25,7 +25,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
   end
 
   it "idle mode for standard mode races",:type => :request do
-    SoundFileWorker.drain
+    SoundFileWorkerer.drain
     RaceLapAnnouncerWorker.drain
 
     pilot_1 = Pilot.create(name: "Pilot 1", transponder_token: 1, quad:'ZMR')
