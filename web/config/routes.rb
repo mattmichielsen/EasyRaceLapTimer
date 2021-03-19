@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   get '/pilots' => 'pilots#index'
   get '/pilots/:id/laps' => 'pilots#laps'
+  get '/pilots/teams' => 'pilots#teams'
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'

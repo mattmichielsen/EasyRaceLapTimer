@@ -6,4 +6,9 @@ class PilotsController < ApplicationController
   def laps
     @pilot = Pilot.find(params[:id])
   end
+
+  def teams
+    @teams = Pilot.select('distinct(team)').map(&:team)
+    render :json => @teams
+  end
 end
