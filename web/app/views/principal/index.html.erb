@@ -41,7 +41,7 @@ a:visited{
 <script>
  
 
-var classTiles = function(x,y) {
+var classTiles = function(x) {
     for (j = 0; j < x.length; j++) { 
         var tempValue = "box";
         var team = document.createElement("h1");
@@ -50,7 +50,7 @@ var classTiles = function(x,y) {
         var linkText = document.createTextNode(x[j]);
         linkTag.appendChild(linkText);
         linkTag.title = x[j];
-        linkTag.href = y;
+        linkTag.href = '/pilots/teams/' + encodeURIComponent(x[j]);
         team.appendChild(linkTag);
         document.getElementById("wrapper").append(team);
 
@@ -58,8 +58,8 @@ var classTiles = function(x,y) {
 
     }
 }
-var y = "https://www.htmldog.com/guides/javascript/advanced/creatingelements/"; 
-var x = ["Hello", "Success","How Long Can THis Get?","One More", "Does it break it?", "cool", "legendary", "let's do it!", "last one", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-classTiles(x,y);
+$.getJSON('/pilots/teams', function (result) {
+  classTiles(result);
+});
 
 </script>

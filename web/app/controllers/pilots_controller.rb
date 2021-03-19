@@ -11,4 +11,9 @@ class PilotsController < ApplicationController
     @teams = Pilot.select('distinct(team)').map(&:team)
     render :json => @teams
   end
+
+  def filter_by_team
+    @pilots = Pilot.where(team: params[:team])
+    render 'index'
+  end
 end
