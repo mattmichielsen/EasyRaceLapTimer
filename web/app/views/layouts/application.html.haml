@@ -38,13 +38,17 @@
                     %li
                       =link_to('Users',{action: 'index',controller: '/system/user'})
                     %li
-                      =link_to('Pilots',{action: 'index',controller: '/system/pilot'})
+                      =link_to('Participants',{action: 'index',controller: '/system/pilot'})
                     %li
                       =link_to('Soundeffects',{action: 'index',controller: '/system/soundfile'})
               %li
                 =link_to('Monitor',{action: 'index',controller: '/monitor'})
+
+              - if current_user.has_role?(:principal)
+                %li
+                  =link_to('Classes',{action: 'index', controller: '/principal'})
               %li
-                =link_to('Pilots',{action: 'index',controller: '/pilots'})
+                =link_to('Participants',{action: 'index',controller: '/pilots'})
               %li
                 =link_to('History',{action: 'index',controller: '/history'})
             

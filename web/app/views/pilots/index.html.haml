@@ -1,16 +1,13 @@
 %h1
-  Pilots
+  Participants
 
 %table.table.table-striped
   %thead
     %tr
       %th
-      %th
         = t('pilot.name')
       %th
         = t('pilot.team')
-      %th
-        = t('pilot.quad')
       %th
         = t('pilot.total_races')
       %th
@@ -19,17 +16,11 @@
     - @pilots.each do |pilot|
       %tr
         %td
-          - if pilot.image
-            = image_tag(pilot.image.url,width: 50,height:50)
-        %td
           %strong
             = pilot.name
         %td
           %strong
             = pilot.team
-        %td
-          %strong
-            = pilot.quad
         %td
           %strong
             = pilot.total_races
