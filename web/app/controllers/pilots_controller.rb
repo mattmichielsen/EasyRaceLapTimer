@@ -1,6 +1,7 @@
 class PilotsController < ApplicationController
   def index
     @pilots = Pilot.order("name ASC")
+    @total_laps = Pilot.all_laps
   end
 
   def laps
@@ -14,6 +15,10 @@ class PilotsController < ApplicationController
 
   def filter_by_team
     @pilots = Pilot.where(team: params[:team])
+    @total_laps = 0
+    @pilots.each do |p|
+      @total_laps += p.total_laps
+    end
     render 'index'
   end
 end
