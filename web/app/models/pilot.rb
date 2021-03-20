@@ -14,6 +14,16 @@ class Pilot < ActiveRecord::Base
   def total_laps
     self.pilot_race_laps.count
   end
+  
+  def self.all_laps
+    laps = 0
+    
+    all.each do |p|
+      laps += p.total_laps
+    end
+    return laps
+  end
+    
 
   def self.to_csv
     attributes = %w{transponder_token name team}
