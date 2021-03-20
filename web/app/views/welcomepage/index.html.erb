@@ -1,4 +1,4 @@
-<% item1 = 10 %>
+
 
 <div id = "backgroundGradient"class = "div-boxes">
     <a href="/">
@@ -30,14 +30,11 @@ FIRST is an acronym which stands for, "For Inspiration And Recognition of Scienc
 <div class = "side-bar">
     <div class = "side-bar-text">
         <h4>Total Miles</h4>
-        <%= item1 %>
+        <%= Pilot.all_laps * 0.2%>
     </div>
 
     <div class = "side-bar-text">
         <h4>Total Laps</h4>
-    </div>
-
-    <div class = "side-bar-text">
-        <h4>Schools Impacted</h4>
+        <%= Pilot.all_laps%>
     </div>
 </div>
