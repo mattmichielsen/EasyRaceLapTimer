@@ -44,7 +44,7 @@
               %li
                 =link_to('Monitor',{action: 'index',controller: '/monitor'})
 
-              - if current_user.has_role?(:principal)
+              - if current_user.has_role?(:admin) || current_user.has_role?(:principal) 
                 %li
                   =link_to('Classes',{action: 'index', controller: '/principal'})
               %li

@@ -35,3 +35,6 @@
             = pilot.total_races
         %td
           = link_to(pilot.total_laps,{action: 'laps', id: pilot.id},class: 'btn btn-primary')
+Count: 
+%strong
+  = @pilots.count
