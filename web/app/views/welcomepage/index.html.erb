@@ -1,15 +1,21 @@
 
 
-<div id = "backgroundGradient"class = "div-boxes">
-    <a href="/">
-        <h1 id = "team85-logo">TEAM 85</h1>
-        <h3>Welcome to TEAM 85's Zeel's Legs of Steel Apllication</h3>
-    </a>
+<div id = "backgroundGradient"class = "">
+    
+    <h1 id = "team85-logo">TEAM 85</h1>
+    <h3>Welcome to TEAM 85's Zeel's Legs of Steel</h3>
+    
 </div>
 
+<br/>
+
+<% if current_user%>
+<%else%>
 <div class = "div-boxes">
     <p>If you are a Zeel's Legs of Steel member please <a href = "<%= main_app.new_user_session_path%>">Log In</a></p>
 </div>
+<%end%>
+
 
 <div class = "div-boxes">
     <h5>Inspired by The First Robotics Innovation Challenge:

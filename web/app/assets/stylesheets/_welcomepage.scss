@@ -18,16 +18,23 @@
 }
 
 .side-bar {
+    padding-left: 5px;
     position: fixed;
     right: 0%;
     top: 60px;
     width: 10%;
     box-shadow: -1px 1px 7px rgb(209, 209, 209);
     height: 300px;
-    z-index: 1;
+    z-index: 24;
     background-color: white;
 }
 
 #backgroundGradient {
-    background: assets-url("blueBackground.png");
+    margin-left: -15px;
+    margin-top: -15px;
+    padding-top: 15px;
+    padding-bottom: 100px;
+    padding-left: 15px;
+    background: white asset-url("blueBackground.jpg") no-repeat left center;
+    color: yellow;
 }
