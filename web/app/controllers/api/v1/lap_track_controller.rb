@@ -45,7 +45,7 @@ class Api::V1::LapTrackController < Api::V1Controller
       return
     end
 
-    filter_udp_broadcast()
+    #filter_udp_broadcast()
 
     render json: pilot_race_lap.to_json
   end
