@@ -156,9 +156,9 @@ class RaceSessionAdapter
     return listing_data
   end
 
-  def track_lap_time(transponder_token,delta_time_in_ms)
+  def track_lap_time(transponder_token,delta_time_in_ms,create_if_not_exist = false)
     if self.race_session.mode == "standard"
-      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
+      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms,create_if_not_exist)
       RaceSessionEventAdapter.new(self,transponder_token).perform
       return res
     elsif self.race_session.mode == "competition"
@@ -196,10 +196,16 @@ class RaceSessionAdapter
   end
 
   # tracking a lap in standard mode
-  def track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
+  def track_lap_time_standard_mode(transponder_token,delta_time_in_ms,create_if_not_exist = false)
     pilot = Pilot.where(transponder_token: transponder_token).first
     if !pilot
-      raise Exception,  "no registered pilot with the transponder token #{transponder_token}"
+      if create_if_not_exist
+        pilot = Pilot.new
+        pilot.transponder_token = transponder_token
+        pilot.save
+      else
+        raise Exception,  "no registered pilot with the transponder token #{transponder_token}"
+      end
     end
 
     # check if the lap tracking was too fast
