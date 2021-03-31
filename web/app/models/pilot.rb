@@ -1,7 +1,5 @@
 class Pilot < ActiveRecord::Base
   require 'csv'
-  #require 'activerecord-import/base'
-  #require 'activerecord-import/active_record/adapters/sqlite3'
   validates :transponder_token, uniqueness: true
   has_many :pilot_race_laps, :dependent => :destroy
   acts_as_paranoid
@@ -38,12 +36,9 @@ class Pilot < ActiveRecord::Base
   end
 
   def self.import(file)
-    #pilots = []
     CSV.foreach(file.path, headers: true) do |row|
-      #pilots <<Pilot.new(row.to_h)
       p = Pilot.new(row.to_h)
       p.save
     end
-    #Pilot.import pilots, recursive: true
   end
 end
