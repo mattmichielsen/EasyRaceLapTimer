@@ -11,3 +11,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( monitor.css pdf.css)
 
 Rails.application.config.assets.prefix = ENV['RAILS_ASSETS_PREFIX'] || ''
+Rails.application.config.assets.prefix << '/assets'
