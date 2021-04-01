@@ -50,7 +50,7 @@ var classTiles = function(x) {
         var linkText = document.createTextNode(x[j]);
         linkTag.appendChild(linkText);
         linkTag.title = x[j];
-        linkTag.href = '/pilots/teams/' + encodeURIComponent(x[j]);
+        linkTag.href = <%= teams_path %> + encodeURIComponent(x[j]);
         team.appendChild(linkTag);
         document.getElementById("wrapper").append(team);
 
@@ -58,7 +58,7 @@ var classTiles = function(x) {
 
     }
 }
-$.getJSON('/pilots/teams', function (result) {
+$.getJSON(<%= teams_path %>, function (result) {
   classTiles(result);
 });
 

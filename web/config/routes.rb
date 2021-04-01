@@ -58,6 +58,10 @@ Rails.application.routes.draw do
   get '/pilots/teams' => 'pilots#teams'
   get '/pilots/teams/:team' => 'pilots#filter_by_team', constraints: { team: /.*/ }
 
+  get '/participants' => 'pilots#index'
+  get '/participants/:id/laps' => 'pilots#laps'
+  get '/participants/teams' => 'pilots#teams', :as => :teams_path
+  get '/participants/teams/:team' = > 'pilots#filter_by_team', constraints: { team: /.*/ }
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'
