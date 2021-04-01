@@ -10,5 +10,4 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( monitor.css pdf.css)
 
-Rails.application.config.assets.prefix = ENV['RAILS_ASSETS_PREFIX'] || ''
-Rails.application.config.assets.prefix << '/assets'
+Rails.application.config.assets.prefix = "#{ENV['RAILS_ASSETS_PREFIX']}/assets"
