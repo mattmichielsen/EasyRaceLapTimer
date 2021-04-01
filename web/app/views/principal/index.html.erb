@@ -40,7 +40,6 @@ a:visited{
 
 <script>
  
-
 var classTiles = function(x) {
     for (j = 0; j < x.length; j++) { 
         var tempValue = "box";
@@ -50,7 +49,7 @@ var classTiles = function(x) {
         var linkText = document.createTextNode(x[j]);
         linkTag.appendChild(linkText);
         linkTag.title = x[j];
-        linkTag.href = <%= teams_path %> + encodeURIComponent(x[j]);
+        linkTag.href = '<%= teams_path_url %>/' + encodeURIComponent(x[j]);
         team.appendChild(linkTag);
         document.getElementById("wrapper").append(team);
 
@@ -58,7 +57,7 @@ var classTiles = function(x) {
 
     }
 }
-$.getJSON(<%= teams_path %>, function (result) {
+$.getJSON('<%= teams_path_url %>', function (result) {
   classTiles(result);
 });
 
