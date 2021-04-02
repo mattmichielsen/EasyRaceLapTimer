@@ -1,4 +1,6 @@
 class PilotsController < ApplicationController
+  before_action :filter_needs_login
+
   def index
     @pilots = Pilot.order("name ASC")
     @total_laps = Pilot.all_laps
