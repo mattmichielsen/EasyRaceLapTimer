@@ -36,7 +36,7 @@ FIRST is an acronym which stands for, "For Inspiration And Recognition of Scienc
 <div class = "side-bar">
     <div class = "side-bar-text">
         <h4>Total Miles</h4>
-        <%= Pilot.all_laps * 0.2%>
+        <%= (Pilot.all_laps.to_f * 0.2).round %>
     </div>
 
     <div class = "side-bar-text">
