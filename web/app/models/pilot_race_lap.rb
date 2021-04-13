@@ -18,7 +18,7 @@ class PilotRaceLap < ActiveRecord::Base
 	  t = RaceSession.find(self.race_session_id).pilot_race_laps_valid.order("lap_time ASC").first
   	if t.id == self.id
       t_fastest_lap = true
-      SoundFileWorker.perform_async("sfx_fastet_lap")
+      #SoundFileWorker.perform_async("sfx_fastet_lap")
       return
   	end
 
@@ -26,7 +26,7 @@ class PilotRaceLap < ActiveRecord::Base
     if t_fastest_lap == false
       t = RaceSession.find(self.race_session_id).pilot_race_laps_valid.where(pilot_id: self.pilot_id).order("lap_time ASC").first
       if t.id == self.id
-        SoundFileWorker.perform_async("sfx_personal_fastet_lap")
+        #SoundFileWorker.perform_async("sfx_personal_fastet_lap")
       end
     end
   end
