@@ -7,6 +7,8 @@ class PilotRaceLap < ActiveRecord::Base
   after_create :filter_fastest_lap
   after_create :filter_mark_latest
 
+  scope :valid, -> { where(invalidated: false) }
+
   def formated_lap_time
     return ((self.lap_time / 1000.0) / 60.0).round(4)
   end

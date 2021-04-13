@@ -10,7 +10,7 @@ class Pilot < ActiveRecord::Base
   end
 
   def total_laps
-    self.pilot_race_laps.count
+    self.pilot_race_laps.valid.count
   end
   
   def self.all_laps
