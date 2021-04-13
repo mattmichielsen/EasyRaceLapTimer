@@ -53,6 +53,6 @@ class RaceSessionEventAdapter
     pilot_num_tracked_laps = self.race_session_adapter.race_session.lap_count_of_pilot(pilot_to_check)
 
     # play the lap announcement for the last tracked lap count for this pilot
-    RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
+    #RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
   end
 end
