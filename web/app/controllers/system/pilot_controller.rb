@@ -1,3 +1,5 @@
+require 'csv'
+
 class System::PilotController < SystemController
   def index
     @pilot_prototype = Pilot.new
@@ -43,6 +45,18 @@ class System::PilotController < SystemController
 
   def strong_params_pilot
     params.require(:pilot).permit(:name,:transponder_token,:image,:quad,:team)
+  end
+
+  def export
+    @pilots = Pilot.all
+    respond_to do |format|
+      format.csv { send_data @pilots.to_csv, filename: "pilots-#{Date.today}.csv", format: :csv }
+    end
+  end
+
+  def import
+    Pilot.import(params[:file])
+    redirect_to action: 'index', notice: "Successfully Imported Data!"
   end
 
 end

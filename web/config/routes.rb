@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  root 'welcomepage#index'
+
+  get 'principal/index'
+
   devise_for :users
   mount Sidekiq::Web => '/sidekiq'
 
@@ -19,6 +23,8 @@ Rails.application.routes.draw do
   get '/system/pilot/edit/:id' => 'system/pilot#edit'
   patch '/system/pilot/update/:id' => 'system/pilot#update'
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
+  get '/system/pilot/export' => 'system/pilot#export', defaults: { format: :csv }
+  post '/system/pilot/import' => 'system/pilot#import'
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
@@ -49,11 +55,19 @@ Rails.application.routes.draw do
 
   get '/pilots' => 'pilots#index'
   get '/pilots/:id/laps' => 'pilots#laps'
+  get '/pilots/teams' => 'pilots#teams'
+  get '/pilots/teams/:team' => 'pilots#filter_by_team', constraints: { team: /.*/ }
+
+  get '/participants' => 'pilots#index'
+  get '/participants/:id/laps' => 'pilots#laps'
+  get '/participants/teams' => 'pilots#teams', as: 'teams_path'
+  get '/participants/teams/:team' => 'pilots#filter_by_team', constraints: { team: /.*/ }
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'
   get '/history/pdf_body/:id' =>  'history#pdf_body'
   get '/history/pdf/:id.:format' => 'history#pdf'
+  get '/history/xlsx/:id' => 'history#export_to_xlsx'
   delete '/history/delete/:id' =>  'history#delete'
 
   ########### API
@@ -74,7 +88,7 @@ Rails.application.routes.draw do
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
 
-  root 'monitor#index'
+  get 'monitor/index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

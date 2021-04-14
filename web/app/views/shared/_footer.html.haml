@@ -2,7 +2,14 @@
   .row
     .col-lg-12
       %p
-        Made & Sponsored by
+        = succeed "." do
+          %a{:href => "http://bob85.com"} FIRST Team 85 - Built on Brains
+      %p
+        Based on 
+        = succeed "." do
+          %a{:href => "https://github.com/mattmichielsen/EasyRaceLapTimer"} EasyRaceLapTimer
+      %p
+        Originally created by 
         = succeed "." do
           %a{:href => "http://www.airbirds.de", :rel => "nofollow"} AirBirds
       %p

@@ -1,4 +1,5 @@
 class MonitorController < ApplicationController
+  before_action :filter_needs_login
   before_action :filter_style_setting
 
   def index

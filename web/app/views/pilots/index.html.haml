@@ -1,14 +1,22 @@
 %h1
-  Pilots
+  Participants
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        = t('Total Laps')
+  %tbody
+    %td
+      %strong
+        = t(@total_laps)
 
 %table.table.table-striped
   %thead
     %tr
       %th
-      %th
         = t('pilot.name')
       %th
-        = t('pilot.quad')
+        = t('pilot.team')
       %th
         = t('pilot.total_races')
       %th
@@ -17,16 +25,16 @@
     - @pilots.each do |pilot|
       %tr
         %td
-          - if pilot.image
-            = image_tag(pilot.image.url,width: 50,height:50)
-        %td
           %strong
             = pilot.name
         %td
           %strong
-            = pilot.quad
+            = pilot.team
         %td
           %strong
             = pilot.total_races
         %td
           = link_to(pilot.total_laps,{action: 'laps', id: pilot.id},class: 'btn btn-primary')
+Count: 
+%strong
+  = @pilots.count
