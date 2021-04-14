@@ -22,4 +22,14 @@ class ConfigValue < ActiveRecord::Base
         return enable_sound.value.downcase == "true"
       end
     end
+
+    def self.create_pilot_if_not_exist
+      create_if_not_exist = get_value("create_pilot_if_not_exist")
+      if create_if_not_exist.nil?
+        ConfigValue.create(name: "create_pilot_if_not_exist", value: "false")
+        return false
+      else
+        return create_if_not_exist.value.downcase == "true"
+      end
+    end
 end

@@ -156,14 +156,20 @@ class RaceSessionAdapter
     return listing_data
   end
 
-  def track_lap_time(transponder_token,delta_time_in_ms,create_if_not_exist = false)
+  def track_lap_time(transponder_token,delta_time_in_ms)
     if self.race_session.mode == "standard"
-      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms,create_if_not_exist)
-      RaceSessionEventAdapter.new(self,transponder_token).perform
+      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms, ConfigValue.create_pilot_if_not_exist)
+      if ConfigValue.enable_sound
+        RaceSessionEventAdapter.new(self,transponder_token).perform
+      end
+
       return res
     elsif self.race_session.mode == "competition"
       res =  self.track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
-      RaceSessionEventAdapter.new(self,transponder_token).perform
+      if ConfigValue.enable_sound
+        RaceSessionEventAdapter.new(self,transponder_token).perform
+      end
+
       return res
     end
   end
