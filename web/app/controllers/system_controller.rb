@@ -11,7 +11,9 @@ class SystemController < ApplicationController
       @race_session = RaceSession.new(strong_params_race_session)
       @race_session.active = true
       @race_session.save
-      #SoundFileWorker.perform_async("sfx_start_race")
+      if ConfigValue.enable_sound
+        SoundFileWorker.perform_async("sfx_start_race")
+      end
     end
 
     redirect_to action: 'index', controller: '/race_director'
