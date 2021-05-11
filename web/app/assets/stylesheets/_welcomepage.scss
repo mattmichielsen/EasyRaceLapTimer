@@ -1,0 +1,40 @@
+// Place all the styles related to the welcomepage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.div-boxes {
+    border: solid 1px gray;
+    border-radius: 15px;
+    width: 90%;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    z-index: 25;
+}
+
+#team85-logo {
+    margin-top: 0px;
+}
+
+.side-bar {
+    padding-left: 5px;
+    position: fixed;
+    right: 0%;
+    top: 60px;
+    width: 10%;
+    box-shadow: -1px 1px 7px rgb(209, 209, 209);
+    height: 300px;
+    z-index: 24;
+    background-color: white;
+}
+
+#backgroundGradient {
+    margin-left: -15px;
+    margin-top: -15px;
+    padding-top: 15px;
+    padding-bottom: 100px;
+    padding-left: 15px;
+    background: white asset-url("blueBackground.jpg") no-repeat left center;
+    color: yellow;
+}

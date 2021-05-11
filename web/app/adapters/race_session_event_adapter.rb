@@ -18,7 +18,7 @@ class RaceSessionEventAdapter
     end
   end
 
-  def  perform_for_competition_mode
+  def perform_for_competition_mode
     max_laps_for_this_race = self.race_session_adapter.race_session.max_laps
     pilot_to_check = self.race_session_adapter.get_pilot_by_token(self.transponder_token)
 

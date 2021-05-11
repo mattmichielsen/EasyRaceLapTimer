@@ -1,4 +1,5 @@
 class HistoryController < ApplicationController
+  before_action :filter_needs_login
   before_action :filter_needs_admin_role, only: [:delete]
 
   def index

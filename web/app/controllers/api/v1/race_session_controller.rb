@@ -3,7 +3,10 @@ class Api::V1::RaceSessionController < Api::V1Controller
     RaceSession::stop_open_session()
 
     race_session = RaceSession.create(title: "Race #{Time.now.to_s(:long)}",active: true)
-    SoundFileWorker.perform_async("sfx_start_race")
+    if ConfigValue.enable_sound
+      SoundFileWorker.perform_async("sfx_start_race")
+    end
+
     render json: race_session.to_json
   end
 
@@ -26,7 +29,9 @@ class Api::V1::RaceSessionController < Api::V1Controller
         if  @race_session.last_created_at_of_tracked_lap + @race_session.idle_time_in_seconds.seconds <= Time.now
           # looks like he have to stop this race
           RaceSession::stop_open_session
-          SoundFileWorker.perform_async("sfx_race_finished")
+          if ConfigValue.enable_sound
+            SoundFileWorker.perform_async("sfx_race_finished")
+          end
         end
     end
 

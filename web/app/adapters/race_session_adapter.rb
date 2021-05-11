@@ -158,12 +158,18 @@ class RaceSessionAdapter
 
   def track_lap_time(transponder_token,delta_time_in_ms)
     if self.race_session.mode == "standard"
-      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
-      RaceSessionEventAdapter.new(self,transponder_token).perform
+      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms, ConfigValue.create_pilot_if_not_exist)
+      if ConfigValue.enable_sound
+        RaceSessionEventAdapter.new(self,transponder_token).perform
+      end
+
       return res
     elsif self.race_session.mode == "competition"
       res =  self.track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
-      RaceSessionEventAdapter.new(self,transponder_token).perform
+      if ConfigValue.enable_sound
+        RaceSessionEventAdapter.new(self,transponder_token).perform
+      end
+
       return res
     end
   end
@@ -196,10 +202,16 @@ class RaceSessionAdapter
   end
 
   # tracking a lap in standard mode
-  def track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
+  def track_lap_time_standard_mode(transponder_token,delta_time_in_ms,create_if_not_exist = false)
     pilot = Pilot.where(transponder_token: transponder_token).first
     if !pilot
-      raise Exception,  "no registered pilot with the transponder token #{transponder_token}"
+      if create_if_not_exist
+        pilot = Pilot.new
+        pilot.transponder_token = transponder_token
+        pilot.save
+      else
+        raise Exception,  "no registered pilot with the transponder token #{transponder_token}"
+      end
     end
 
     # check if the lap tracking was too fast
@@ -209,7 +221,10 @@ class RaceSessionAdapter
     end
 
     pilot_race_lap = self.race_session.add_lap(pilot,delta_time_in_ms)
-    SoundFileWorker.perform_async("sfx_lap_beep")
+    if ConfigValue.enable_sound
+      SoundFileWorker.perform_async("sfx_lap_beep")
+    end
+
     return pilot_race_lap
   end
 
@@ -228,8 +243,6 @@ class RaceSessionAdapter
       end
     end
 
-
-
     # check if the lap tracking was too fast
     last_track = self.race_session.pilot_race_laps.where(pilot_id: ra.pilot.id).order("ID DESC").first
     if last_track && last_track.created_at + ConfigValue::get_value("time_between_lap_track_requests_in_seconds").value.to_i.seconds > Time.now
@@ -241,7 +254,10 @@ class RaceSessionAdapter
     end
 
     pilot_race_lap = self.race_session.add_lap(ra.pilot,delta_time_in_ms)
-    SoundFileWorker.perform_async("sfx_lap_beep")
+    if ConfigValue.enable_sound
+      SoundFileWorker.perform_async("sfx_lap_beep")
+    end
+
     return pilot_race_lap
   end
 

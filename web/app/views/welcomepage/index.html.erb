@@ -1,0 +1,46 @@
+
+
+<div id = "backgroundGradient">
+    
+    <h1 id = "team85-logo">TEAM 85</h1>
+    <h3>Welcome to TEAM 85's Zeel's Legs of Steel</h3>
+    
+</div>
+
+<br/>
+
+<% if current_user%>
+<%else%>
+<div class = "div-boxes">
+    <p>If you are a Zeel's Legs of Steel member please <a href = "<%= main_app.new_user_session_path%>">Log In</a></p>
+</div>
+<%end%>
+
+
+<div class = "div-boxes">
+    <h5>Inspired by The First Robotics Innovation Challenge:
+
+In the First Innovation Challenge, teams were asked to identify a real world problem and solution that make us physically and mentally strong.  Teams were challenged to invent innovative tools and ways that people of all abilities and skill levels could thrive through active play and movement.  Team 85 chose to design a system to assist elementary schools with their lap-running exercise programs.  An automated RFID system was designed to decrease volunteer manpower and automatically accumulate stats.  This frees up participants to run unencumbered by data tracking hurtles.  Team 85 hopes this system will help provide fun opportunities in physical fitness and encourage mental wellness.<h5>
+</div>
+
+<div class = "div-boxes">
+    <p>Info About First:
+
+FIRST is an acronym which stands for, "For Inspiration And Recognition of Science and Technology".  It provides students with hands on opportunities to discover the fields of computer programming, design, mechatronics, build, and business administration.  This is accomplished with adult volunteer mentors from these various professional fields working side-by-side with students on the challenges FIRST annually provides.  Zeeland High School's Team 85 B.O.B. (Build on Brains) has existed for over 25 years and has had a rich history of exploring the opportunities of science and technology with students.</p>
+</div>
+
+<div class = "div-boxes">
+    <h3>"Working hard can be fun and profoundly satisfying.  In FIRST we do our best work when we're helping others and treating others with respect and kindness.  This ethos is something I like to call gracious professionalism." - Woodie Flowers</h3>
+</div>
+
+<div class = "side-bar">
+    <div class = "side-bar-text">
+        <h4>Total Miles</h4>
+        <%= (Pilot.all_laps.to_f * 0.2).round %>
+    </div>
+
+    <div class = "side-bar-text">
+        <h4>Total Laps</h4>
+        <%= Pilot.all_laps%>
+    </div>
+</div>
