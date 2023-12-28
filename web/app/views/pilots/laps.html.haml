@@ -1,12 +1,12 @@
 %ol.breadcrumb
   %li
-    = link_to('Pilots',{action: 'index', controller: '/pilots'})
+    = link_to('Participants',{action: 'index', controller: '/pilots'})
 
 .row
   .col-md-3
     .row
       .col-xs-6.col-md-3
-        - if @pilot.image
+        - if @pilot.image.present?
           = image_tag(@pilot.image.url,class: 'thumbnail',width: 173, height: 173)
   .col-md-6
     %h1
@@ -14,14 +14,18 @@
     .small
       %strong
         = @pilot.quad
+    .small
+      %strong
+        =  link_to(t('actions.add_manual_lap'),{action: 'add_manual_lap', controller: '/race_director', pilotid: @pilot.id},)
 
 %table.table.table-striped
   %thead
     %tr
       %th Tracked on
-      %th Race
+      %th Event
       %th Lap Number
       %th Lap Time
+      %th Manual Entry
       %th
 
   %tbody
@@ -32,13 +36,16 @@
             = lap_entry.created_at.to_s(:long)
         %td
           %strong
-            = lap_entry.race_session.title
+            = lap_entry.race_session&.title
         %td
           %strong
             = lap_entry.lap_num
         %td
           %strong
             = formated_lap_time(lap_entry.lap_time)
+        %td
+          %strong
+            = check_box_tag :isManual, "1", lap_entry.isManual, disabled: true
         %td
           %strong
             = link_to_if(lap_entry.invalidated?, t('actions.undo_invalidate_lap'),{action: 'undo_invalidate_lap', controller: '/race_director', lapid:lap_entry.id},{class: 'btn btn-danger btn-large'}) do

@@ -16,5 +16,7 @@
 
 - if @current_race_session.mode == "competition"
   = render file: '/shared/_table_race_results_competition_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+-elsif params[:simple]
+  = render file: '/shared/_table_race_results_simple_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
 -else
   = render file: '/shared/_table_race_results_standard_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}

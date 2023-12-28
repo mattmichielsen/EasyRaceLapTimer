@@ -19,6 +19,10 @@ module ApplicationHelper
   end
 
   def formated_lap_time(t) # convert to seconds
-    return "#{(t / 1000.0).round(4)}s"
+    if t.present?
+      return "#{(t / 1000.0).round(4)}s"
+    else
+      return nil
+    end
   end
 end

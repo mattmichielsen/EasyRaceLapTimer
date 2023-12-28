@@ -4,11 +4,21 @@
 
 this setup is based on Raspian JESSIE
 
+## development requirements (wsl Ubuntu/Debian)
+    cd /path/to/EasyRaceLapTimer/web
+    sudo apt-get install build-essential ruby-dev libssl-dev libapr1-dev libaprutil1-dev imagemagick wkhtmltopdf redis-server libsqlite3-dev nodejs
+    sudo gem install bundler
+    bundle
+    rake db:create
+    rake db:migrate
+    rake db:seed
+    
+
 ## install requirements
 
 switch to the **web** folder in your EasyRaceLapTimer folder
 
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev  imagemagick wkhtmltopdf redis-server
+    sudo apt-get install ruby-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev  imagemagick wkhtmltopdf redis-server
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"

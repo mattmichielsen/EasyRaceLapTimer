@@ -1,6 +1,7 @@
 class RaceSession < ActiveRecord::Base
   acts_as_paranoid
 
+  belongs_to :season
   has_many :pilot_race_laps
   has_many :race_attendees
   enum mode:[:standard,:competition]
@@ -79,20 +80,20 @@ class RaceSession < ActiveRecord::Base
   end
 
   def fastest_lap_time
-    t = self.pilot_race_laps_valid.order("lap_time ASC").first
+    t = self.pilot_race_laps_valid_with_time.order("lap_time ASC").first
     return t.lap_time if t
     return 0
   end
 
    def fastest_pilot
-    t = self.pilot_race_laps_valid.order("lap_time ASC").first
+    t = self.pilot_race_laps_valid_with_time.order("lap_time ASC").first
     return t.pilot if t
     return nil
   end
 
   def average_lap_time
     begin
-      self.pilot_race_laps_valid.sum(:lap_time) / self.pilot_race_laps.count
+      self.pilot_race_laps_valid_with_time.sum(:lap_time) / self.pilot_race_laps.count
     rescue Exception => ex
       return 0
     end
@@ -112,7 +113,7 @@ class RaceSession < ActiveRecord::Base
   end
 
   def fastest_lap_of_pilot(pilot)
-    return self.pilot_race_laps_valid.where(pilot_id: pilot.id).order("lap_time ASC").first
+    return self.pilot_race_laps_valid_with_time.where(pilot_id: pilot.id).order("lap_time ASC").first
   end
 
   def last_lap_of_pilot(pilot)
@@ -127,6 +128,10 @@ class RaceSession < ActiveRecord::Base
 
   def pilot_race_laps_valid
     return self.pilot_race_laps.where(invalidated: false)
+  end
+
+  def pilot_race_laps_valid_with_time
+    return self.pilot_race_laps_valid.where("lap_time > 0")
   end
 
   def avg_lap_time_of_pilot(pilot)

@@ -1,4 +1,5 @@
 class HistoryController < ApplicationController
+  before_action :filter_needs_login
   before_action :filter_needs_admin_role, only: [:delete]
 
   def index
@@ -56,5 +57,24 @@ class HistoryController < ApplicationController
   def pdf_body
     @current_race_session = RaceSession.find(params[:id])
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
+  end
+
+  def pdf_by_team
+    @style_setting = StyleSetting.where(id: 1).first_or_create
+    @current_race_session = RaceSession.find(params[:id])
+    @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        @current_format = :pdf
+        render pdf: "race_session_#{@current_race_session.id}.pdf",
+        page_size: 'A4',
+        show_as_html: params.key?('debug'),
+        template: 'history/pdf_by_team.html.haml',
+        layout: 'pdf.html',
+        orientation: 'portrait'
+      end
+    end
   end
 end

@@ -1,0 +1,25 @@
+- race_session_adapter.listing_simple_mode.select { |w| w.has_key?('team') && !w['team'].nil? }.sort_by {|s| s['team']}.group_by {|g| g['team']}.each do |team, entries|
+  %h2= team
+  .table-responsive
+    %table.table.table-striped.table-condensed
+      %thead
+        %tr
+          %th
+            Participant
+          %th
+            Laps
+          %th
+            Miles
+      - entries.each do |entry|
+        %tbody
+          %tr
+            %td
+              %strong
+                = entry['name']
+            %td
+              %strong
+                = entry['lap_count']
+            %td
+              %strong
+                = (entry['lap_count'] * ConfigValue.laps_to_miles_ratio).round(2)
+  .alwaysbreak

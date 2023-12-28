@@ -13,6 +13,9 @@
                   Active Session:
                 = RaceSession::get_open_session.title
                 %label{:for => "exampleInputName2"}
+                  Season:
+                = RaceSession::get_open_session.season&.name
+                %label{:for => "exampleInputName2"}
                   Mode:
                 = RaceSession::get_open_session.mode
                 %label{:for => "exampleInputName2"}
@@ -34,6 +37,10 @@
           .row
             .col-xs-12
               = form_for(@race_session_prototype,url: {action: 'start_race_session',controller: '/system'},html: {class: 'form-inline'}) do |f|
+                .form-group
+                  %label{:for => "exampleInputName2"}
+                    Season 
+                  = f.collection_select(:season_id, Season.all, :id, :name, {:selected => Season.last&.id}, {class: 'form-control'})
                 .form-group
                   %label{:for => "exampleInputName2"}
                     = t('race_session.title')
