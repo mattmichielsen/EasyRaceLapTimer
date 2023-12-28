@@ -18,7 +18,7 @@ class RaceSessionEventAdapter
     end
   end
 
-  def  perform_for_competition_mode
+  def perform_for_competition_mode
     max_laps_for_this_race = self.race_session_adapter.race_session.max_laps
     pilot_to_check = self.race_session_adapter.get_pilot_by_token(self.transponder_token)
 
@@ -52,7 +52,9 @@ class RaceSessionEventAdapter
     pilot_to_check = self.race_session_adapter.get_pilot_by_token(self.transponder_token)
     pilot_num_tracked_laps = self.race_session_adapter.race_session.lap_count_of_pilot(pilot_to_check)
 
-    # play the lap announcement for the last tracked lap count for this pilot
-    RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
+    if ConfigValue.enable_sound
+      # play the lap announcement for the last tracked lap count for this pilot
+      RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
+    end
   end
 end

@@ -1,12 +1,17 @@
 require 'socket'
 class Api::V1::LapTrackController < Api::V1Controller
   def create
-
-    @race_session =  RaceSession::get_open_session
+    if params[:session].blank?
+      @race_session =  RaceSession::get_open_session
+    else
+      @race_session = RaceSession.find(params[:session])
+    end
 
     if !@race_session # maybe the last one was one with  defined idle time... => autostart
       @race_session = RaceSession::get_session_from_previous
-      SoundFileWorker.perform_async("sfx_start_race")
+      if ConfigValue.enable_sound
+        SoundFileWorker.perform_async("sfx_start_race")
+      end
     end
 
     # there's no active race session
@@ -36,7 +41,7 @@ class Api::V1::LapTrackController < Api::V1Controller
 
     begin
       race_session_adapter = RaceSessionAdapter.new(@race_session)
-      pilot_race_lap = race_session_adapter.track_lap_time(params[:transponder_token],params[:lap_time_in_ms],true)
+      pilot_race_lap = race_session_adapter.track_lap_time(params[:transponder_token], params[:lap_time_in_ms], params[:is_retry])
     rescue Exception => ex
       #render status: 403, text: "#{ex.message}\n#{ex.backtrace.join("\n")}"
       puts ex.message
@@ -55,9 +60,11 @@ class Api::V1::LapTrackController < Api::V1Controller
   def filter_udp_broadcast
 
     addr = [ConfigValue::get_value("udp_broadcast_address").value, 33333]# broadcast address
-    udp_socket = UDPSocket.new
-    udp_socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_BROADCAST, true)
-    udp_socket.send(RaceSessionAdapter.new(@race_session).monitor_data.to_json.to_s, 0, addr[0], addr[1])
-    udp_socket.close
+    unless addr[0].to_s.strip.empty?
+      udp_socket = UDPSocket.new
+      udp_socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_BROADCAST, true)
+      udp_socket.send(RaceSessionAdapter.new(@race_session).monitor_data.to_json.to_s, 0, addr[0], addr[1])
+      udp_socket.close
+    end
   end
 end

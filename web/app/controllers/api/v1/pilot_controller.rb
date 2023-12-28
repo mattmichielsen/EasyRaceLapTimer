@@ -10,20 +10,65 @@ class Api::V1::PilotController < Api::V1Controller
 
   def show
     @pilot = Pilot.find_by(transponder_token: params[:transponder_token])
+    if !@pilot
+      render json: @pilot, status: 404
+      return
+    end
+
+    render json: @pilot
+  end
+
+  def by_id
+    @pilot = Pilot.find_by(external_id: [params[:external_id]])
+    if !@pilot
+      render json: @pilot, status: 404
+      return
+    end
+
     render json: @pilot
   end
 
   def create
     begin
-      @pilot = Pilot.new
-      @pilot.assign_attributes(JSON.parse(request.raw_post))
-      if @pilot.save
-        render json: @pilot
+      incoming = JSON.parse(request.raw_post)
+      if incoming.has_key?("external_id")
+        existing = Pilot.find_by(external_id: incoming['external_id'])
+      end
+
+      if existing
+        logger.info "Existing found"
+        changed = incoming.reject {|k, v| v.blank?}
+        existing.update_attributes(changed)
+        if existing.save
+          render json: existing, status: 204
+        else
+          render nothing: true, status: :bad_request
+        end
       else
-        render nothing: true, status: :bad_request
+        logger.info "Creating new"
+        @pilot = Pilot.new
+
+        @pilot.assign_attributes(incoming)
+        if @pilot.save
+          render json: @pilot, status: 201
+        else
+          render nothing: true, status: :bad_request
+        end
       end
     rescue Exception => ex
       render status: 400, text: ex.message
     end
+  end
+
+  def deactivate
+    @pilot = Pilot.find_by(transponder_token: params[:transponder_token])
+    if !@pilot
+      render json: @pilot, status: 404
+      return
+    end
+
+    @pilot.update_attribute(:transponder_token, "")
+    @pilot.save
+    render text: "Success", status: 200
   end
 end

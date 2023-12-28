@@ -3,23 +3,21 @@
     %thead
       %tr
         %th
-          place
+          Place
         %th
 
         %th
-          pilot
+          Participant
         %th
-          quad
+          Team
         %th
-          team
+          Fasted Lap Time
         %th
-          fasted lap time
+          Last Lap Time
         %th
-          last lap time
+          Laps
         %th
-          laps
-        %th
-          avg lap time
+          Avg Lap Time
     %tbody
       - race_session_adapter.listing.each_with_index do |entry,index|
         %tr{class: "#{"success" if entry['latest_tracked']}"}
@@ -35,9 +33,6 @@
           %td
             %strong
               = entry['pilot'].name
-          %td
-            %strong
-              = entry['pilot'].quad
           %td
             %strong
               = entry['pilot'].team

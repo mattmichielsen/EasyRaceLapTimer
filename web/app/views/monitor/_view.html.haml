@@ -1,4 +1,6 @@
 - if @current_race_session.mode == "competition"
   = render file: '/monitor/_view_competition_mode'
--else
+- elsif params[:simple]
+  = render file: '/monitor/_view_simple_mode'
+- else
   = render file: '/monitor/_view_standard_mode'

@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
       return
     end
   end
+
+  def filter_needs_login
+    if !current_user
+      redirect_to "/"
+      return
+    end
+  end
 end

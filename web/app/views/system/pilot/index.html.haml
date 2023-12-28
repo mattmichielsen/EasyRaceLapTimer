@@ -35,6 +35,8 @@
       %th
         = t('pilot.transponder_token')
       %th
+        = t('pilot.external_id')
+      %th
         = t('pilot.quad')
       %th
         = t('pilot.team')
@@ -52,6 +54,8 @@
         %td
           = pilot.transponder_token
         %td
+          = pilot.external_id
+        %td
           = pilot.quad
         %td
           = pilot.team
@@ -65,3 +69,10 @@
           = link_to(url_for(action: 'delete', id: pilot.id),{"data-confirm" => "Sure?", method: :delete}) do
             %button.btn.btn-warning
               = t('actions.delete')
+
+Total pilots:
+%p= @pilots.length
+%p= link_to("Export", url_for(action: 'export'))
+= form_tag url_for(action: 'import'), :multipart => true do
+  = file_field_tag :file
+  = submit_tag "Import"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502142410) do
+ActiveRecord::Schema.define(version: 20230217005134) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.datetime "deleted_at"
     t.boolean  "latest"
     t.boolean  "invalidated",     default: false
+    t.boolean  "isManual"
   end
 
   add_index "pilot_race_laps", ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at"
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.datetime "deleted_at"
     t.string   "quad"
     t.string   "team"
+    t.string   "external_id"
   end
 
   add_index "pilots", ["deleted_at"], name: "index_pilots_on_deleted_at"
@@ -69,9 +71,11 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.integer  "time_penalty_per_satellite", default: 2500
     t.boolean  "hot_seat_enabled",           default: false
     t.integer  "idle_time_in_seconds",       default: 0
+    t.integer  "season_id"
   end
 
   add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"
+  add_index "race_sessions", ["season_id"], name: "index_race_sessions_on_season_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -94,6 +98,12 @@ ActiveRecord::Schema.define(version: 20160502142410) do
 
   add_index "satellite_check_points", ["race_attendee_id"], name: "index_satellite_check_points_on_race_attendee_id"
   add_index "satellite_check_points", ["race_session_id"], name: "index_satellite_check_points_on_race_session_id"
+
+  create_table "seasons", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "soundfiles", force: :cascade do |t|
     t.string "name"
