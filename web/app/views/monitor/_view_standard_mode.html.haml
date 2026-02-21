@@ -15,4 +15,4 @@
         Current Laps:
         = @current_race_session_adapter.current_lap_count
 
-= render file: '/shared/_table_race_results_standard_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+= render partial: "shared/table_race_results_standard_mode", locals: { race_session: @current_race_session, race_session_adapter: @current_race_session_adapter }

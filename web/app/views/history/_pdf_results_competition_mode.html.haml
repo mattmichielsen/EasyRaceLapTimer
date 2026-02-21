@@ -1,10 +1,10 @@
-= render partial:'race_info_header'
+= render "history/race_info_header"
 
 %h2
   Results
 
-= render file: '/shared/_table_race_results_competition_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+= render partial: "shared/table_race_results_competition_mode", locals: { race_session: @current_race_session, race_session_adapter: @current_race_session_adapter }
 
 -@current_race_session_adapter.pilot_ids.each do |pilot_id|
   .alwaysbreak
-    = render partial: 'competition_mode_pilot', locals: {pilot: Pilot.with_deleted.find(pilot_id)}
+    = render partial: "history/competition_mode_pilot", locals: { pilot: Pilot.with_deleted.find(pilot_id) }

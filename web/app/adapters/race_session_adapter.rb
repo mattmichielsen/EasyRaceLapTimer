@@ -38,10 +38,11 @@ class RaceSessionAdapter
   end
 
   def listing
-    if self.race_session.mode == "standard"
-      return self.listing_standard_mode
-    elsif self.race_session.mode == "competition"
-      return self.sort_list_by_time_penalties
+    return [] if race_session.blank?
+    case race_session.mode.to_s
+    when "standard" then listing_standard_mode
+    when "competition" then sort_list_by_time_penalties
+    else listing_standard_mode
     end
   end
 

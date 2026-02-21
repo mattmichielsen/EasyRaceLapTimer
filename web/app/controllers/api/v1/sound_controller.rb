@@ -4,6 +4,6 @@ class Api::V1::SoundController < Api::V1Controller
 			CustomSoundfileWorker.perform_async(params[:id])
 		end
 
-		render status: 200, text: ""
+		render status: 200, plain: ""
 	end
 end

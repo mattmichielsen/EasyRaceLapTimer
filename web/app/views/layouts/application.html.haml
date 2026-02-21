@@ -8,7 +8,7 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     %meta{name:"viewport", content:"width=device-width", "initial-scale"=>1}
-    = render file: '/shared/_favicon'
+    = render "shared/favicon"
   %body
     #host_data{"data-rails-cable-ip" => @RAILS_CABLE_IP}
     %navbar.navbar-default.navbar-fixed-top
@@ -73,4 +73,4 @@
               = message
         .col-xs-12
           = yield
-      = render file: '/shared/_footer'
+      = render "shared/footer"

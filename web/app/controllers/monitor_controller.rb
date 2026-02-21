@@ -12,9 +12,9 @@ class MonitorController < ApplicationController
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
 
     if !@current_race_session
-      render text: ""
+      render plain: ""
     else
-      render layout: false
+      render partial: "monitor/view", layout: false
     end
   end
 

@@ -58,8 +58,7 @@ class RaceSession < ActiveRecord::Base
   end
 
   def filter_reset_ir_daemon
-    load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-    ::IRDaemonCmd::send("RESET#\n")
+    IRDaemonCmd.send("RESET#\n")
   end
 
   def add_lap(pilot, lap_time, lap_id = nil)

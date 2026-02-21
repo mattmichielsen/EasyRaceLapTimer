@@ -47,8 +47,10 @@
         %td
           = pilot.id
         %td
-          - if pilot.image
-            = image_tag(pilot.image.url,width: 50,height:50)
+          - if pilot.image.present? && pilot.image.url.present?
+            = image_tag(pilot.image.url, width: 50, height: 50)
+          - else
+            %span —
         %td
           = pilot.name
         %td

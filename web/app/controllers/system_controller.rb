@@ -22,16 +22,15 @@ class SystemController < ApplicationController
   def stop_race_session
     @race_session = RaceSession::get_open_session
     if @race_session
-      @race_session.update_attribute(:active,false)
-      load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-      IRDaemonCmd::send("RESET#\n")
+      @race_session.update_attribute(:active, false)
+      IRDaemonCmd.send("RESET#\n")
       @race_session.update_attribute(:idle_time_in_seconds,0) # this one is important! otherwise the system will automaticly clone it.... so you won't be able to stop a session ;)
     end
     redirect_to action: 'index', controller: '/race_director'
   end
 
   def update_style
-    @style_setting.update_attributes(strong_params_style_settings)
+    @style_setting.update(strong_params_style_settings)
     redirect_to action: 'index'
   end
 
@@ -42,8 +41,7 @@ class SystemController < ApplicationController
   end
 
   def shutdown
-    load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-    ::IRDaemonCmd::send("SHUTDOWN#\n")
+    IRDaemonCmd.send("SHUTDOWN#\n")
     redirect_to action: 'index'
   end
 

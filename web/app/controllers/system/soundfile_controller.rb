@@ -30,8 +30,7 @@ class System::SoundfileController < SystemController
   end
 
   def change_volume
-    load "#{Rails.root}/lib/alsa_mixer.rb"
-    AlsaMixer::change_volume(params[:vol])
+    AlsaMixer.change_volume(params[:vol])
     redirect_to action: 'index'
   end
 

@@ -13,7 +13,7 @@ class System::PilotController < SystemController
 
   def update
     @pilot = Pilot.find(params[:id])
-    if !@pilot.update_attributes(strong_params_pilot)
+    unless @pilot.update(strong_params_pilot)
       flash[:error] = @pilot.errors.full_messages.to_sentence
     end
     redirect_to action: 'index'

@@ -38,11 +38,11 @@ class Api::V1::PilotController < Api::V1Controller
       if existing
         logger.info "Existing found"
         changed = incoming.reject {|k, v| v.blank?}
-        existing.update_attributes(changed)
+        existing.update(changed)
         if existing.save
           render json: existing, status: 204
         else
-          render nothing: true, status: :bad_request
+          head :bad_request
         end
       else
         logger.info "Creating new"
@@ -52,11 +52,11 @@ class Api::V1::PilotController < Api::V1Controller
         if @pilot.save
           render json: @pilot, status: 201
         else
-          render nothing: true, status: :bad_request
+          head :bad_request
         end
       end
     rescue Exception => ex
-      render status: 400, text: ex.message
+      render status: 400, plain: ex.message
     end
   end
 
@@ -69,6 +69,6 @@ class Api::V1::PilotController < Api::V1Controller
 
     @pilot.update_attribute(:transponder_token, "")
     @pilot.save
-    render text: "Success", status: 200
+    render plain: "Success", status: 200
   end
 end

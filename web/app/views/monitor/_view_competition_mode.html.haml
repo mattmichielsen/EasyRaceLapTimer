@@ -19,4 +19,4 @@
         Time penalty:
         = formated_lap_time(@current_race_session.time_penalty_per_satellite)
 
-= render file: '/shared/_table_race_results_competition_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+= render partial: "shared/table_race_results_competition_mode", locals: { race_session: @current_race_session, race_session_adapter: @current_race_session_adapter }
